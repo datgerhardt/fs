@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const App = (props) => {
-  const counter = props.counter
+  const {counter }= props
 
   return (
   <div>
