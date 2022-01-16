@@ -9,12 +9,16 @@ const App = () => {
       1000
     )
 
-    console.log('rendering...', counter )
-    
-  return (
-  <div>
-    {counter}
-  </div>
-)}
+    return (
+    <div>
+      {counter}
+      <button onClick={() => setCounter(counter +1)}>
+        plus
+      </button>
+      <button onClick={() => setCounter(0)}>
+        Zero
+      </button>
+    </div>
+  )}
   
 export default App;
