@@ -9,13 +9,16 @@ const App = () => {
       1000
     )
 
+    const  increaseByOne = () => setCounter(counter +1)
+    const  setToZero = () => setCounter(0)
+
     return (
     <div>
       {counter}
-      <button onClick={() => setCounter(counter +1)}>
+      <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={() => setCounter(0)}>
+      <button onClick={setToZero}>
         Zero
       </button>
     </div>
