@@ -13,7 +13,7 @@ const App = () => {
     <div>
       {value}
       <button onClick={setToValue(1000)}>thousand</button>
-      <button onClick={setToValue(0)}>Set to Zero</button>
+      <button onClick={setToValue(0)}>Reset</button>
       <button onClick={setToValue(value +1)}>Increment</button>
     </div>
   )
