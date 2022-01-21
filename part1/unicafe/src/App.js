@@ -23,11 +23,11 @@ const Statistics = (props) => {
       <h1>statistics</h1>
       <table>
         <StatisticsLine text={'good'} value={props.good}/>
-      <StatisticsLine text={'neutral'} value={props.neutral}/>
-      <StatisticsLine text={'bad'} value={props.bad}/>
-      <StatisticsLine text={'all'} value={props.total}/>
-      <StatisticsLine text={'average'} value={props.average}/>
-      <StatisticsLine text={'positive'} value={props.positivePercentage}/>
+        <StatisticsLine text={'neutral'} value={props.neutral}/>
+        <StatisticsLine text={'bad'} value={props.bad}/>
+        <StatisticsLine text={'all'} value={props.total}/>
+        <StatisticsLine text={'average'} value={props.average}/>
+        <StatisticsLine text={'positive'} value={props.positivePercentage}/>
       </table>
     </div>
   )
