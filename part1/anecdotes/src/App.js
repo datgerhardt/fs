@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Display = ({selected, anecdotes}) => {
+const Display = ({selected, anecdotes, points}) => {
 
   if (anecdotes.length === selected +1){
     return(
@@ -9,9 +9,14 @@ const Display = ({selected, anecdotes}) => {
   }
 
   return (
-    <p>{anecdotes[selected]}</p>
+    <div>
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]} votes</p>
+    </div>   
   )
 }
+
+
 
 const App = () => {
   const anecdotes = [
@@ -23,7 +28,7 @@ const App = () => {
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
-  
+
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
@@ -42,11 +47,35 @@ const App = () => {
     setPoints([...copy])
 
   }
+  // const highestVote = (points)=>{
+  //   let votes = [...points]
+  //   let maxValue = 0 
+  //   let i=0
+
+  //   for(i; votes.length; i++){
+  //     if (votes[i] > maxValue){
+  //       maxValue = votes[i] 
+  //     } else {
+  //       continue
+  //     }
+  //   }
+
+  //   return {i , maxValue}
+  // }
+  // const {i , maxValue} = highestVote(points)
+    
   return (
     <div>
-      <Display anecdotes={anecdotes} selected={selected}/>
+      {/* <h1> Anecdotes of the day </h1> */}
+      <Display anecdotes={anecdotes} selected={selected} points={points}/>
+      
       <button onClick={handleVoteClick}>vote</button>
       <button onClick={handleNextClick}> next anecdotes</button>
+
+      {/* <h1> Anecdotes with the most votes </h1>
+      <Display anecdotes={anecdotes} selected={i} points={points}/>
+      <p> {maxValue} </p> */}
+
     </div>
   )
 }
