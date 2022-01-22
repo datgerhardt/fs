@@ -17,6 +17,26 @@ const Display = ({selected, anecdotes, points}) => {
 }
 
 
+const DisplayMostVote = ({anecdotes, points}) => {
+  const max = Math.max(...points);
+  const index = points.indexOf(max);
+
+  if(max === 0){
+    return(
+      <div>
+        <p>There is no anecdotes with max vote yet</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <p>{anecdotes[index]}</p>
+      <p>has {points[index]} votes</p>
+    </div>   
+  )
+}
+
 
 const App = () => {
   const anecdotes = [
@@ -32,8 +52,6 @@ const App = () => {
   const [selected, setSelected] = useState(0)
   const [points, setPoints] = useState(Array(anecdotes.length).fill(0))
 
-
-
   const handleNextClick = () => {
     if (anecdotes.length <= selected+1){
       setSelected(selected)
@@ -45,37 +63,18 @@ const App = () => {
     let copy = [...points]
     copy[selected] += 1
     setPoints([...copy])
-
   }
-  // const highestVote = (points)=>{
-  //   let votes = [...points]
-  //   let maxValue = 0 
-  //   let i=0
-
-  //   for(i; votes.length; i++){
-  //     if (votes[i] > maxValue){
-  //       maxValue = votes[i] 
-  //     } else {
-  //       continue
-  //     }
-  //   }
-
-  //   return {i , maxValue}
-  // }
-  // const {i , maxValue} = highestVote(points)
-    
+  
   return (
     <div>
-      {/* <h1> Anecdotes of the day </h1> */}
+      <h1> Anecdotes of the day </h1>
       <Display anecdotes={anecdotes} selected={selected} points={points}/>
       
       <button onClick={handleVoteClick}>vote</button>
       <button onClick={handleNextClick}> next anecdotes</button>
 
-      {/* <h1> Anecdotes with the most votes </h1>
-      <Display anecdotes={anecdotes} selected={i} points={points}/>
-      <p> {maxValue} </p> */}
-
+      <h1> Anecdotes with the most votes </h1>
+      <DisplayMostVote anecdotes={anecdotes}  points={points}/>
     </div>
   )
 }
