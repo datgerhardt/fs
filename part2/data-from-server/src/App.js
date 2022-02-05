@@ -6,17 +6,18 @@ import Note from './components/Note'
   const [notes, setNotes] = useState([]) 
   // const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
-  
-  const hook = () => {
+ 
+  useEffect(() => {
+    const eventHandler = res => {  
+      console.log('promise fulfilled');
+      setNotes(res.data)            
+    }
+
     console.log('effect')
-    axios.get('http://localhost:3001/notes').then(
-      res => {  
-        console.log('promise fulfilled');
-        setNotes(res.data)            
-      })
-  }
-  
-  useEffect(hook, [])
+    const promise = axios.get('http://localhost:3001/notes')
+    promise.then(eventHandler)
+
+  }, [])
   console.log('render', notes.length, 'notes')
 
   const noteToShow = showAll ? notes : notes.filter(note => note.important === true)
