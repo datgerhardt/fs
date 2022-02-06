@@ -41,6 +41,12 @@
       "date": "2022-02-05T16:59:42.015Z",
       "important": false,
       "id": 7
+    },
+    {
+      "content": "PUT is use to update to REST api",
+      "date": "2022-02-06T22:25:35.073Z",
+      "important": true,
+      "id": 8
     }
   ]
 }

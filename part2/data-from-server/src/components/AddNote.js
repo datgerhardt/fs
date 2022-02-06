@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import noteService from '../services/notes'
 
 const AddNote = ({notes, setNotes}) => {
    
@@ -13,9 +13,11 @@ const AddNote = ({notes, setNotes}) => {
             important: Math.random() < 0.5
         }
     
-        axios.post('http://localhost:3001/notes', newObj).then(
-            res => {
-                setNotes(notes.concat(res.data))
+        noteService
+        .create(newObj)
+        .then(
+            returnedNote => {
+                setNotes(notes.concat(returnedNote))
                 setNewNote('')
             }
         )          
