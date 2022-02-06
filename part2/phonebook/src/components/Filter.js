@@ -9,9 +9,7 @@ const Filter = ({persons}) => {
     setFilter(event.target.value)
     let arr = persons.map(person => person.name.toLowerCase() + " " + person.number)
     let result = arr.filter(s => s.includes(filter.toLowerCase()))
-    result.map(e => e.toCa)
     setNewResultfilter(result)
-    // console.log(result)
   }
 
     return(

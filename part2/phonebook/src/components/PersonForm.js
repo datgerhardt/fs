@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import backend from '../services/persons'
+
 
 const PersonForm = ({persons, setPersons}) => {
    
@@ -17,7 +19,13 @@ const PersonForm = ({persons, setPersons}) => {
         if(arr.includes(newObj.name)){
           alert(`${newName} is already added to phonebook`)
         } else {
-          setPersons(persons.concat(newObj))
+          backend
+          .create(newObj)
+          .then(newContact => {
+            setPersons(persons.concat(newContact))
+            setNewName('')
+            setNewNumber('')
+          })          
         }   
       }
 
