@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import backend from '../services/persons'
 
 
-const PersonForm = ({persons, setPersons}) => {
+const PersonForm = ({persons, setPersons, setMessage}) => {
    
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
@@ -22,16 +22,45 @@ const PersonForm = ({persons, setPersons}) => {
           backend
           .update(id, newObj)
           .then(
-            returnPerson => setPersons(persons.map(p => p.id !== returnPerson.id ? p : returnPerson)) 
-          )
+            returnPerson => {
+              setPersons(persons.map(p => p.id !== returnPerson.id ? p : returnPerson))
+              setMessage(
+                {msg:`Updated '${returnPerson.name}'  `, status:true }
+              )
+              setTimeout(() => {
+                setMessage({msg:'', status:true })
+              }, 5000)   
+            })
+            .catch(( )=> {
+              setMessage(
+                {msg:`Information of '${newObj.name}' has already been removed from the server`, status:false }
+              )
+              setTimeout(() => {
+                setMessage({msg:'', status:true })
+              }, 5000)   
+            })      
         } else {
           backend
           .create(newObj)
-          .then(newContact => {
-            setPersons(persons.concat(newContact))
+          .then(returnPerson => {
+            setPersons(persons.concat(returnPerson))
             setNewName('')
             setNewNumber('')
-          })          
+            setMessage(
+              {msg:`Added '${returnPerson.name}'  `, status:true }
+            )
+            setTimeout(() => {
+              setMessage({msg:'', status:true })
+            }, 5000)   
+          })
+          .catch(( )=> {
+            setMessage(
+              {msg:`This phone '${newObj.name}' was not added to the server`, status:false }
+            )
+            setTimeout(() => {
+              setMessage({msg:'', status:true })
+            }, 5000)   
+          })     
         }   
       }
 
