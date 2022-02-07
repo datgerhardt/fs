@@ -11,4 +11,9 @@ const create = newContact => {
     return req.then(res => res.data)
 }
 
-export default { getAll, create }
+const deletePerson = id => {
+    const req = axios.delete(`${baseUrl}/${id}`)
+    return req.then(res => res.data)   
+} 
+
+export default { getAll, create, deletePerson}
