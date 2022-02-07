@@ -87,4 +87,4 @@ const PersonForm = ({persons, setPersons, setMessage}) => {
     )
 }
 
-export default PersonForm
+export default PersonForm 
