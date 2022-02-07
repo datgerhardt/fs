@@ -14,10 +14,16 @@ const PersonForm = ({persons, setPersons}) => {
           number: newNumber
         }
     
-        let arr = persons.map(person => person.name)
+        let arr = persons.map(person => person.name)        
+        let win = window.confirm(`${newObj.name} is already added to phonebook, replace the old number with a new one`)
         
-        if(arr.includes(newObj.name)){
-          alert(`${newName} is already added to phonebook`)
+        if(arr.includes(newObj.name) && win){
+          let id = arr.indexOf(newObj.name) +1
+          backend
+          .update(id, newObj)
+          .then(
+            returnPerson => setPersons(persons.map(p => p.id !== returnPerson.id ? p : returnPerson)) 
+          )
         } else {
           backend
           .create(newObj)
