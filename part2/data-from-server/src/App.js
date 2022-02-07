@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import './index.css'
 import Note from './components/Note'
 import AddNote from './components/AddNote'
 import noteService from './services/notes'
