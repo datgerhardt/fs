@@ -37,16 +37,43 @@ app.get('/api/persons/:id', (req, res) => {
     let person = persons.find(p => p.id === id)
 
     if(!person){
-        return res.status(404).json({error: 'Not found'})
+      return res.status(404).json({error: 'Not found'})
     }
     res.json(person)
 })
 
 app.get('/info', (req, res) => {
-    let date = new Date()
+  let date = new Date()
     res.send(`<p>Phone has info for ${persons.length} people</p> <p>${date}</p>`)
 })
 
+app.delete('/api/persons/:id', (req, res) => {
+  let id = Number(req.params.id)
+  persons = persons.filter(p => p.id !== id)
+  res.status(204).end()
+})
+
+app.post('/api/persons', (req, res) => {
+  let body = req.body
+  if(!body.name && !body.number){
+    return res.json({error:'content is missing'})
+  } 
+
+  let person = {
+    id: generateId(),
+    name: body.name,
+    number: body.number
+  }  
+  
+  persons.concat(person)
+  res.json(person)
+})
+
+const generateId = () => {
+  let id = Math.ceil(Math.random() * 10000)
+  return id
+}
+
 app.listen(3001, ()=>{
-    console.log('Server is running')
+  console.log('Server is running')
 })
