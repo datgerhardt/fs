@@ -1,16 +1,17 @@
-const express = require('express')
+import express from 'express'
+// const express = require('express')
 const app = express()
 app.use(express.json())
 
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
+const reqLogger = (req, res, next) => {
+  console.log('Method:', req.method)
+  console.log('Path:  ', req.path)
+  console.log('Body:  ', req.body)
   console.log('---')
   next()
 }
 
-app.use(requestLogger)
+app.use(reqLogger)
 
 let notes = [
     {
@@ -81,8 +82,8 @@ const generateId = () => {
     return maxId + 1
 }
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: 'unknown endpoint' })
 }
 
 app.use(unknownEndpoint)
